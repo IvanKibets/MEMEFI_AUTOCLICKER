@@ -1,17 +1,15 @@
-## Yayasan Kematian Santa Maria
+## Koperasi
 
 ## Instalasi
 
-Software yang dibutuhkan XAMPP, Composer, Nodejs, NPM
+Software yang dibutuhkan XAMPP, Composer
 
 Install semua software yang dibutuhkan
 
 Buka CMD / Terminal dan masuk ke folder project ketik command dibawah ini
 > composer update
-
-setelah itu ketik perintah ini
-> npm install
-
+> php artisan serve
+> 
 selesai
 
 ## Teknologi
