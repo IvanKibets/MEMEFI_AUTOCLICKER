@@ -21,6 +21,10 @@ Route::get('register', App\Http\Livewire\Register::class)->name('register');
 Route::get('konfirmasi-pembayaran',App\Http\Livewire\KonfirmasiPembayaran::class)->name('konfirmasi-pembayaran');
 Route::get('konfirmasi-pendaftaran',App\Http\Livewire\KonfirmasiPendaftaran::class)->name('konfirmasi-pendaftaran');
 Route::get('transaksi/cetak-struk-kasir/{data}',[\App\Http\Controllers\TransaksiController::class,'cetakStruk'])->name('transaksi.cetak-struk-kasir');
+
+// Route::get('print-price-tag/{data}',[App\Http\Controllers\PriceTagController::class,'tmgMonthly'])->name('print-price-tag');
+
+
 // All login
 Route::group(['middleware' => ['auth']], function(){    
     Route::get('profile',App\Http\Livewire\Profile::class)->name('profile');

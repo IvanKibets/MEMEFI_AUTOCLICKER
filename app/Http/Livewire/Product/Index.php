@@ -11,6 +11,7 @@ class Index extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $keyword,$filter=[],$is_confirm_delete=false,$selected_id=0;
+    public $show_print=false, $arr_pricetag=[];
     protected $listeners = ['refresh'=>'$refresh'];
     public function render()
     {
@@ -174,5 +175,46 @@ class Index extends Component
         return response()->streamDownload(function() use($writer){
             $writer->save('php://output');
         },'produk-' .date('d-M-Y') .'.xlsx');
+    }
+
+    public function select_pricetag($id)
+    {
+        // $check = \App\Models\ContractRegistrationFlow::where('id',$id)->first();
+        // if($check->remarks == '1'){
+        //     $check->remarks = '';
+        // }else{
+        //     $check->remarks = '1';
+        // }
+        // $check->save();
+        // $arr_pricetag = [];
+        array_push($this->arr_pricetag, $id);
+        // $this->arr_pricetag = $arr_pricetag;
+        
+    }
+
+    public function print_pricetag(){
+        // dd($this->arr_pricetag);
+        // dd($this->arr_pricetag);
+        // $arr_id = [];
+        // foreach($this->arr_pricetag as $item){
+        //     array_push($arr_id, $item);
+        // }
+
+        // dd($arr_id);
+
+        $data = Product::whereIn('id', $this->arr_pricetag)->orderBy('id','DESC')->get();
+
+        // dd($data);
+
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadView('livewire.product.print-price-tag',['data'=>$data]);
+        
+        // return $pdf->stream();
+        return $pdf->download('price-tag.pdf');
+
+
+        // view()->share('employee',$data);
+        // $pdf = PDF::loadView('pdf_view', $data);
+        // return $pdf->download('pdf_file.pdf');
     }
 }

@@ -41,6 +41,23 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="col-md-1">
+                    @if($show_print == false)
+                        <button type="button" class="btn btn-info" wire:click="$set('show_print','true')">Select</button>
+                    @else
+                        <button type="button" class="btn btn-danger" wire:click="$set('show_print','false')"><i class="fa fa-close"></i>Cancel</button>
+                    @endif
+                </div>
+
+                {{print_r($arr_pricetag)}}
+                
+
+                @if($show_print == true)
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-info" wire:click="print_pricetag()"><i class="fa fa-print"></i> Print</button>
+                </div>
+                @endif
                 <div class="col-md-6">
                     <div class="btn-group" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
@@ -49,6 +66,7 @@
                             <a href="{{route('product.insert')}}" class="dropdown-item"><i class="fa fa-plus"></i> Tambah</a>
                             <a href="javascript:void(0)" class="dropdown-item" wire:click="download"><i class="fa fa-download"></i> Download</a>
                             <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#modal_upload"><i class="fa fa-upload"></i> Upload</a>
+                            <!-- <a href="javascript:void(0)" class="dropdown-item" wire:click="$set('show_print')"><i class="fa fa-print"></i> Print</a> -->
                         </div>
                     </div>
                     <span wire:loading>
@@ -62,6 +80,9 @@
                     <table class="table table-hover m-b-0 c_list">
                         <thead style="background: #eee;">
                            <tr>
+                                @if($show_print == true)
+                                <th></th>
+                                @endif
                                 <th>No</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Type</th>
@@ -96,6 +117,9 @@
                                     @endif
                                 @endif
                                 <tr style="background: {{$bg_minimum_stok}}" title="{{$title}}">
+                                    @if($show_print == true)
+                                    <td><input type="checkbox" wire:click="select_pricetag({{ $item->id }})" name="print_pricetag[{{$item->id}}]"></td>
+                                    @endif
                                     <td style="width: 50px;">{{$number}}</td>
                                     <td class="text-center">
                                         @if($item->status==1)
