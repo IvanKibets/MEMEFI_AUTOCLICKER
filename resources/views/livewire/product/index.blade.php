@@ -55,7 +55,8 @@
 
                 @if($show_print == true)
                 <div class="col-md-2">
-                    <button type="button" class="btn btn-info" wire:click="print_pricetag()"><i class="fa fa-print"></i> Print</button>
+                    <!-- <button type="button" class="btn btn-info" wire:click="print_pricetag()"><i class="fa fa-print"></i> Print</button> -->
+                    <a href="javascript:;" wire:click="print_pricetag()"><i class="fa fa-print"></i>Print</a>
                 </div>
                 @endif
                 <div class="col-md-6">
@@ -69,10 +70,10 @@
                             <!-- <a href="javascript:void(0)" class="dropdown-item" wire:click="$set('show_print')"><i class="fa fa-print"></i> Print</a> -->
                         </div>
                     </div>
-                    <span wire:loading>
+                    <!-- <span wire:loading>
                         <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
                         <span class="sr-only">{{ __('Loading...') }}</span>
-                    </span>
+                    </span> -->
                 </div>
             </div>
             <div class="body pt-0">

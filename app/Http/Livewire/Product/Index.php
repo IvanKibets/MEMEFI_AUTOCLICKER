@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Product;
 use Livewire\Component;
 use App\Models\Product;
 use Livewire\WithPagination;
+use PDF;
 
 class Index extends Component
 {
@@ -206,12 +207,25 @@ class Index extends Component
 
         // dd($data);
 
-        $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadView('livewire.product.print-price-tag',['data'=>$data]);
+        // $pdf = \App::make('dompdf.wrapper');
+        // $pdf = PDF::loadView('livewire.product.print-price-tag',['data'=>$data])->output();
+        // $pdf = PDF::loadView('livewire.product.print-price-tag',['data'=>$data]);
+        $pdf = PDF::loadView('livewire.product.print-price-tag',$data);
+        
+
+        // $pdf = PDF::loadView('livewire/team-schedule/generateusertimesheetpdf', ['data'=>$data])->output();
+	    // return $pdf->stream();
         
         // return $pdf->stream();
-        return $pdf->download('price-tag.pdf');
+        $pdf->download('pt.pdf');
+        // dd($pdf);
+        // dd($pdf);
+        // return $pdf->stream('price-tag.pdf');
+        // dd($data);
 
+
+        // $pdf = PDF::loadview('livewire.product.print-price-tag',['pegawai'=>$data]);
+    	// return $pdf->download('laporan-pegawai-pdf');
 
         // view()->share('employee',$data);
         // $pdf = PDF::loadView('pdf_view', $data);
